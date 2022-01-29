@@ -9,10 +9,10 @@ Este codígo es realizado por SantiLoz*/
 #endif
 #define in1 D1
 #define in2 D2
-#define in3 D3
-#define in4 D4
+#define in3 D7
+#define in4 D6
 #define ena D5
-#define enb D6
+
 
 unsigned int localPort = 8888;   
 int n;
@@ -35,8 +35,7 @@ void setup() {
   pinMode(in3, OUTPUT);
   pinMode(in4, OUTPUT);
   pinMode(ena, OUTPUT);
-  pinMode(enb, OUTPUT);
-  velocidad=125;
+  velocidad=50;
    digitalWrite(in1,LOW);
    digitalWrite(in2,LOW);
    digitalWrite(in3,LOW);
@@ -52,14 +51,18 @@ void loop() {
       digitalWrite(in1,HIGH);
       digitalWrite(in2,LOW);
             if (velocidad<255){velocidad=velocidad+1;}
-            anlogWrite(ena,velocidad);
+      analogWrite(ena,velocidad);
+      digitalWrite(in3,LOW);
+      digitalWrite(in4,LOW);
       }
 
       if(n==98){//retroceder
       digitalWrite(in1,LOW);
       digitalWrite(in2,HIGH);
-      velocidad=155;
-      anlogWrite(ena,155)
+      velocidad=125;
+      analogWrite(ena,125);
+      digitalWrite(in3,LOW);
+      digitalWrite(in4,LOW);
       }
 
       if(n==100){//derecha
@@ -72,7 +75,15 @@ void loop() {
       digitalWrite(in4,LOW);
       }
 
-      
+      if(n==49){//STOP
+      digitalWrite(in1,LOW);
+      digitalWrite(in2,LOW);
+      digitalWrite(in3,LOW);
+      digitalWrite(in4,LOW);
+      velocidad=50;
+      }
+
+    //  Serial.printf("es: %d \n" ,velocidad);
       
   }
 
